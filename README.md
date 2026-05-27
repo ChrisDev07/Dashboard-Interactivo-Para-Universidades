@@ -47,7 +47,7 @@ Dashboard local para analizar datos académicos de estudiantes universitarios. E
 Clona el repositorio y entra al directorio del proyecto:
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone <https://github.com/ChrisDev07/Dashboard-Interactivo-Para-Universidades.git>
 cd dashboard-Interactivo-Universitario
 ```
 
@@ -133,7 +133,3 @@ Desde la aplicación se pueden generar reportes en:
 - PDF
 
 Los archivos se guardan automáticamente en la carpeta `reports/`.
-
-## Notas para GitHub
-
-Se recomienda no subir el entorno virtual `venv/`, archivos `__pycache__/` ni reportes generados automáticamente. Estos archivos pueden excluirse con un `.gitignore`.
