@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body { margin:0; height:100%; background:#0B1628; color:#EAF2FF; font-family:Segoe UI, Arial, sans-serif; }
+    .chart-shell { height:100vh; padding:12px; box-sizing:border-box; background:linear-gradient(135deg,#0B1628,#132238); }
+    canvas { width:100% !important; height:100% !important; }
+  </style>
+</head>
+<body>
+  <div class="chart-shell"><canvas id="chart"></canvas></div>
+  <script>
+    const data = {{DATA_PLACEHOLDER}};
+    new Chart(document.getElementById("chart"), {
+      type: "doughnut",
+      data: {
+        labels: data.labels,
+        datasets: [{
+          data: data.values,
+          backgroundColor: ["#2DD4BF", "#FFD166", "#EF476F", "#60A5FA"],
+          borderColor: "#0B1628",
+          borderWidth: 2
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: "58%", plugins: { legend: { labels: { color: "#EAF2FF" } } } }
+    });
+  </script>
+</body>
+</html>

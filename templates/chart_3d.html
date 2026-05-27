@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <style>
+    html, body { margin:0; height:100%; overflow:hidden; background:#0B1628; font-family:Segoe UI, Arial, sans-serif; }
+    #scene { width:100vw; height:100vh; display:block; }
+    .caption { position:absolute; top:8px; left:10px; color:#FFD166; font-size:12px; font-weight:700; }
+  </style>
+</head>
+<body>
+  <div class="caption">Semestre · Programa · Ingresos</div>
+  <canvas id="scene"></canvas>
+  <script>
+    const data = {{DATA_PLACEHOLDER}};
+    const canvas = document.getElementById("scene");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#0B1628");
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    camera.position.set(8, 8, 13);
+    camera.lookAt(3.5, 1.5, 2);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+    const light = new THREE.DirectionalLight(0xffffff, 0.8);
+    light.position.set(4, 6, 8);
+    scene.add(light);
+
+    const grid = new THREE.GridHelper(9, 8, "#2DD4BF", "#243B61");
+    grid.position.set(3.5, -0.05, 1.5);
+    scene.add(grid);
+
+    const maxZ = Math.max(1, ...data.points.map(point => point.z));
+    data.points.forEach(point => {
+      const radius = Math.max(0.08, 0.12 + (point.z / maxZ) * 0.24);
+      const geometry = new THREE.SphereGeometry(radius, 24, 16);
+      const material = new THREE.MeshStandardMaterial({ color: "#60A5FA", emissive: "#2DD4BF", emissiveIntensity: 0.28, roughness: 0.35 });
+      const sphere = new THREE.Mesh(geometry, material);
+      sphere.position.set(point.x, (point.z / maxZ) * 5, point.y);
+      scene.add(sphere);
+    });
+
+    function resize() {
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+    function animate() {
+      resize();
+      scene.rotation.y += 0.0025;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

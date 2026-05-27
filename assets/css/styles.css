@@ -1,0 +1,34 @@
+:root {
+  --color-primary: #2E6DA4;
+  --color-secondary: #4CAF88;
+  --color-accent: #F0A500;
+  --color-danger: #E05252;
+  --color-warning: #F4A261;
+  --color-bg: #F5F7FA;
+  --color-card: #FFFFFF;
+  --color-text: #2D3748;
+  --color-text-muted: #718096;
+  --color-border: #E2E8F0;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-card);
+  color: var(--color-text);
+  font-family: Segoe UI, Arial, sans-serif;
+}
+
+.chart-shell {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
